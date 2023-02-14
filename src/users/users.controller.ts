@@ -1,15 +1,34 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body,Res, Patch, Param, Delete, HttpStatus } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { response } from 'express';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  // @Post()
+  // create(@Body() createUserDto: CreateUserDto) {
+  //   return this.usersService.create(createUserDto);
+  // }
+
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async createUser(@Res() response, @Body() createUserDto:CreateUserDto){
+    try{
+      const newUser = await this.usersService.create(createUserDto);
+
+      return response.status(HttpStatus.CREATED).json({
+        message:'User has been created Successfully',newUser
+      });
+
+    }catch (e){
+      return response.status(HttpStatus.BAD_REQUEST).json({
+        statusCode:400,
+        message:'Error User Not Created!',
+        error:'Bad Request'
+      })
+    }
   }
 
   @Get(':id')
