@@ -28,36 +28,34 @@ export class ApiService {
 
   async findUser(userId: number): Promise<IUsers> {
     const exitingUser = await this.model.findById(userId).exec();
-    if (!exitingUser) {
-      throw new NotFoundException(`Users #${userId} not found!`);
-    }
+    if (!exitingUser) throw new NotFoundException(`Users #${userId} not found!`);
     return exitingUser;
   }
 
   async findAllUser(): Promise<IUsers[]> {
     const data = await this.model.find();
-    if (!data || data.length == 0) {
-      throw new NotFoundException(' Users data not found!');
-    }
+    if (!data || data.length == 0) throw new NotFoundException(' Users data not found!');
     return data;
   }
 
   async updateUsers(userId: string, updateUserDto: UpdateUserDto): Promise<IUsers> {
-    const data = await this.model.findByIdAndUpdate(userId, updateUserDto, {
-      new: true
-    });
-    if (!data) {
-      throw new NotFoundException(`User #${userId} not found!`);
+    const profile = await this.model.findById(userId)
+    if (!profile) throw new NotFoundException(`User #${userId} not found!`);
+
+    profile.profile = {
+      ...profile.profile,
+      ...updateUserDto
     }
-    return data;
+ 
+    return profile;
   }
   async updateProfile(userId: string, updateUserDto: UpdateUserDto): Promise<IUsers> {
-    const data = await this.model.findByIdAndUpdate(userId, updateUserDto, {
+    const data = await this.model.findByIdAndUpdate(userId,  {
+      profile: updateUserDto
+    }, {
       new: true
     });
-    if (!data) {
-      throw new NotFoundException(`User #${userId} not found!`);
-    }
+    if (!data) throw new NotFoundException(`User #${userId} not found!`);
     return data;
   }
 
@@ -83,15 +81,24 @@ export class ApiService {
 
   async login(user: any) {
     const { email } = user
-    const payload = { sub: user.userId, email };
+    const data = await this.model.findOne({email: `${email}`});
+    const payload = {data};
+
+    if (!data) {
+      return {
+        status: "error",
+        message: "User Error!"
+      }
+    }
+
     const token = await this.jwtService.signAsync(payload,{
       secret: "rahasia",
       expiresIn: "1d" 
     });
     delete user.password
     return {
-      email,
-      access_token: token
+      access_token: token,
+      data
     }
   }
 

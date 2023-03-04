@@ -24,13 +24,14 @@ export class ApiController {
   @Post('register')
   async createUser(@Res() response, @Body() createUserDto: CreateUserDto) {
     createUserDto.profile = {
-      display_name: "",
-      photo_profile:"",
-      gender: "",
-      birthday: "",
-      zodiac: "",
-      height: 0,
-      weight: 0,
+      display_name: "-",
+      photo_profile: "-",
+      gender: "-",
+      birthday: "-",
+      zodiac: "-",
+      shio: "-",
+      height: "0",
+      weight: "0",
     };
     try {
       const data = await this.apiService.createUsers(createUserDto);
@@ -75,10 +76,11 @@ export class ApiController {
   }
   //update user by id
   @UseGuards(JwtAuthGuard)
-  @Put('users/:id')
+  @Put('update/:id')
   async updateUser(@Res() response, @Param('id') userId: string, @Body() updateUserDto: UpdateUserDto) {
     try {
       const data = await this.apiService.updateUsers(userId, updateUserDto);
+      data.save();
       return response.status(HttpStatus.OK).json({
         message: 'Users has been succesfully update',
         data
@@ -90,7 +92,7 @@ export class ApiController {
 
   //upload file
   @Post('upload')
-  @UseInterceptors(FileInterceptor('file', {
+  @UseInterceptors(FileInterceptor('photo_profile', {
     storage: diskStorage({
       destination: `./storage/product_image/`,
       filename: (req, file, callBack) => {
@@ -120,18 +122,23 @@ export class ApiController {
       }
     })
   }),)
-  async uploadProfileImage(@Res() response,@Param('id') userId:number, @UploadedFile() file,updateUserDto:UpdateUserDto):Promise<IUsers> {
-    try{
+  async uploadProfileImage(@Res() response, @Param('id') userId: number, @UploadedFile() file, updateUserDto: UpdateUserDto): Promise<IUsers> {
+    try {
       const data = await this.apiService.findUser(userId);
-      data.profile.photo_profile = file.path;
+      data.profile = {
+        ...data.profile,
+        photo_profile: `/profile_user/${file.originalname}`
+      };
+      data.save();
+
       return response.status(HttpStatus.OK).json({
         success: true,
         data
       });
-    }catch (e) {
+    } catch (e) {
       return response.status(e.status).json(e.status);
     }
   }
-  
+
 }
 

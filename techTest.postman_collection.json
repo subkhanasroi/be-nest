@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "6a957778-9d3f-4ed6-ae91-df2d9ddd546c",
+		"name": "techTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11535236"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"asroi budianto\",\r\n    \"email\":\"asroi@mail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}register",
+							"host": [
+								"{{base_url}}register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"asroi@mail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local_url}}login",
+							"host": [
+								"{{local_url}}login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "profile",
+			"item": [
+				{
+					"name": "profile-id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN1YmtoYW5AbWFpbC5jb20iLCJpYXQiOjE2Nzc3NTE3NTAsImV4cCI6MTY3NzgzODE1MH0.1FrTliJq60ayRR68JazN-IrOA-ZUa-ipUVvNUzM1t4A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}users/63f5c9b0bb95d3f0a1c92cd3",
+							"host": [
+								"{{base_url}}users"
+							],
+							"path": [
+								"63f5c9b0bb95d3f0a1c92cd3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjY0MDBkMDBjNGQwOTc5YjU5MDVlN2QzMyIsInVzZXJuYW1lIjoibnVnIGJ1ZGlhbnRvIiwiZW1haWwiOiJudWdAbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1Njc4IiwicHJvZmlsZSI6eyJkaXNwbGF5X25hbWUiOiItIiwicGhvdG9fcHJvZmlsZSI6Ii9wcm9maWxlX3VzZXIvd2FndWItcmFrb3ItRGVzYS1kYW1waW5nYW4uanBnIiwiZ2VuZGVyIjoiLSIsImJpcnRoZGF5IjoiLSIsInpvZGlhYyI6Ii0iLCJoZWlnaHQiOjAsIndlaWdodCI6MH0sIl9fdiI6MH0sImlhdCI6MTY3Nzg1MDc5OCwiZXhwIjoxNjc3OTM3MTk4fQ.X9DuqE5UYL_EbmSOs1jtd7w5q5MB90EAd4kuZQUXc0s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo_profile",
+									"type": "file",
+									"src": "/C:/Users/subkh/Downloads/wagub-rakor-Desa-dampingan.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}update/64007c08514238c035de2d04",
+							"host": [
+								"{{base_url}}update"
+							],
+							"path": [
+								"64007c08514238c035de2d04"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change photo profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjY0MDBkMDBjNGQwOTc5YjU5MDVlN2QzMyIsInVzZXJuYW1lIjoibnVnIGJ1ZGlhbnRvIiwiZW1haWwiOiJudWdAbWFpbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1Njc4IiwicHJvZmlsZSI6eyJkaXNwbGF5X25hbWUiOiItIiwicGhvdG9fcHJvZmlsZSI6Ii0iLCJnZW5kZXIiOiItIiwiYmlydGhkYXkiOiItIiwiem9kaWFjIjoiLSIsImhlaWdodCI6MCwid2VpZ2h0IjowfSwiX192IjowfSwiaWF0IjoxNjc3ODQ0Mzk5LCJleHAiOjE2Nzc5MzA3OTl9.xyapJsMKvRhNpLdokAJ-02_YnGQeqJTmWflBc_fm_Kw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profile_id",
+									"value": "63f4b8cf291bed59ef582456",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/subkh/Downloads/wagub-rakor-Desa-dampingan.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}upload-photo/6400d00c4d0979b5905e7d33",
+							"host": [
+								"{{base_url}}upload-photo"
+							],
+							"path": [
+								"6400d00c4d0979b5905e7d33"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "63f5c9b0bb95d3f0a1c92cd3",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload-image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN1YmtoYW5AbWFpbC5jb20iLCJpYXQiOjE2Nzc3NTE3NTAsImV4cCI6MTY3NzgzODE1MH0.1FrTliJq60ayRR68JazN-IrOA-ZUa-ipUVvNUzM1t4A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}upload",
+							"host": [
+								"{{base_url}}upload"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "all-user",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:3000/api/",
+			"type": "string"
+		},
+		{
+			"key": "local_url",
+			"value": "http://192.168.1.19:3000/api/",
+			"type": "string"
+		}
+	]
+}
