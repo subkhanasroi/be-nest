@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"nug budianto\",\r\n    \"email\":\"nug@mail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+							"raw": "{\r\n    \"username\":\"asroi budianto\",\r\n    \"email\":\"asroi@mail.com\",\r\n    \"password\":\"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,7 +39,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"mamank@mail.com\",\r\n    \"password\":\"1234\"\r\n}",
+							"raw": "{\r\n    \"email\":\"asroi@mail.com\",\r\n    \"password\":\"12345678\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
