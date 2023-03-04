@@ -14,7 +14,7 @@ export class Users {
     @Prop()
     password: string;
 
-    @Prop({type:Object})
+    @Prop({type:Object,default:null})
     profile: object;
 
 

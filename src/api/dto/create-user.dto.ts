@@ -24,8 +24,9 @@ export class CreateUserDto {
         gender:string,
         birthday:string,
         zodiac:string,
-        height:number,
-        weight:number,
+        shio:string,
+        height:string,
+        weight:string,
 
     }
 
